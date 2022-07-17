@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
-
-async function fetchData() {
-  const response = await fetch('https://localhost:7104/weatherforecast', {
-    method: 'GET',
-  });
-  const data = await response.json();
-  console.log(data);
-}
-fetchData();
+import Button from '@mui/material/Button';
+import CropPlants from './pages/CropPlants';
 
 function App() {
-  return <div className=''></div>;
+  return <CropPlants />;
 }
 
 export default App;
