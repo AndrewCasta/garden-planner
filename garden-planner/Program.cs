@@ -1,3 +1,5 @@
+using garden_planner.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
@@ -29,24 +31,17 @@ app.UseHttpsRedirection();
 
 app.UseCors("CORSPolicy");
 
-var summaries = new[]
+app.MapGet("/plant-varieties", async () =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    List<PlantVariety> data = await PlantVarietiesData.GetPlantVarietiesAsync();
+    return Results.Ok(data);
+});
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/plant-varieties/{id}", async (int id) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+    PlantVariety data = await PlantVarietiesData.GetPlantVarietyAsync(id);
+    return Results.Ok(data);
+});
 
 app.Run();
 
