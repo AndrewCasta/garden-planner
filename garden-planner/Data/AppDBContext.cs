@@ -5,6 +5,7 @@ namespace garden_planner.Data
     internal sealed class AppDBContext : DbContext
     {
         public DbSet<PlantVariety> PlantVarieties { get; set; }
+        public DbSet<Crop> Crops { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

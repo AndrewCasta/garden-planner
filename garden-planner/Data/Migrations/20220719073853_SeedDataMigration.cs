@@ -9,6 +9,19 @@ namespace garden_planner.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Crops",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Crops", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PlantVarieties",
                 columns: table => new
                 {
@@ -133,6 +146,9 @@ namespace garden_planner.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Crops");
+
             migrationBuilder.DropTable(
                 name: "PlantVarieties");
         }

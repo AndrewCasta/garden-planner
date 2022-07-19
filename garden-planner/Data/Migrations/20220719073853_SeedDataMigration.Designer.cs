@@ -10,13 +10,28 @@ using garden_planner.Data;
 namespace garden_planner.Data.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20220719071613_SeedDataMigration")]
+    [Migration("20220719073853_SeedDataMigration")]
     partial class SeedDataMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.7");
+
+            modelBuilder.Entity("garden_planner.Data.Crop", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Crops");
+                });
 
             modelBuilder.Entity("garden_planner.Data.PlantVariety", b =>
                 {

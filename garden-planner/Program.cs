@@ -43,9 +43,15 @@ app.MapGet("/plant-varieties/{id}", async (int id) =>
     return Results.Ok(data);
 });
 
-app.Run();
-
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
+app.MapGet("/crops", async () =>
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+    List<Crop> data = await CropData.GetCropsAsync();
+    return Results.Ok(data);
+});
+app.MapGet("/crop/{id}", async (int id) =>
+{
+    Crop data = await CropData.GetCropAsync(id);
+    return Results.Ok(data);
+});
+
+app.Run();

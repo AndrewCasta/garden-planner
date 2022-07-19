@@ -16,6 +16,21 @@ namespace garden_planner.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.7");
 
+            modelBuilder.Entity("garden_planner.Data.Crop", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Crops");
+                });
+
             modelBuilder.Entity("garden_planner.Data.PlantVariety", b =>
                 {
                     b.Property<int>("ID")
