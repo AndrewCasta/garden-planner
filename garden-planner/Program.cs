@@ -53,5 +53,10 @@ app.MapGet("/crop/{id}", async (int id) =>
     Crop data = await CropData.GetCropAsync(id);
     return Results.Ok(data);
 });
+app.MapGet("/plant-varieties/crop/{id}", async (int id) =>
+{
+    List<int> data = await CropPlantVarietyData.GetCropPlantVarietiesAsync(id);
+    return Results.Ok(data);
+});
 
 app.Run();

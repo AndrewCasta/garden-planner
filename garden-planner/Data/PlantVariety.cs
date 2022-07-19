@@ -2,19 +2,19 @@
 
 namespace garden_planner.Data
 {
-    enum Lifecycle
+    public enum Lifecycle
     {
         Annual, Perennial
     }
-    enum Sun
+    public enum Sun
     {
         Full, Partial, Shade
     }
-    enum Water
+    public enum Water
     {
         High, Moderate, Low
     }
-    internal sealed class PlantVariety
+    public class PlantVariety
     {
 
         public int ID { get; set; }
@@ -28,6 +28,9 @@ namespace garden_planner.Data
         public bool Autum { get; set; }
         public bool Winter { get; set; }
         public string Image { get; set; } = string.Empty;
+
+        public ICollection<CropPlantVariety> CropPlantVarieties { get; set; }
+
     }
 
     public class PlantVarietiesData

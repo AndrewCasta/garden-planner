@@ -6,6 +6,7 @@ namespace garden_planner.Data
     {
         public DbSet<PlantVariety> PlantVarieties { get; set; }
         public DbSet<Crop> Crops { get; set; }
+        public DbSet<CropPlantVariety> CropPlantsVarieties { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,6 +22,13 @@ namespace garden_planner.Data
             modelBuilder.Entity<PlantVariety>().Property(e => e.Water).HasConversion<String>();
 
             PlantVariety[] plantVarietySeed = new PlantVariety[20];
+            Crop[] cropSeed = new Crop[1];
+            CropPlantVariety[] cropPlantVarietySeed = new CropPlantVariety[2];
+
+            cropSeed[0] = new Crop { ID = 1, Name = "First Crop" };
+            cropPlantVarietySeed[0] = new CropPlantVariety { ID = 1, CropID = 1, PlantVarietyID = 1 };
+            cropPlantVarietySeed[1] = new CropPlantVariety { ID = 2, CropID = 1, PlantVarietyID = 2 };
+
 
             plantVarietySeed[0] = new PlantVariety
             {
@@ -305,6 +313,9 @@ namespace garden_planner.Data
 
 
             modelBuilder.Entity<PlantVariety>().HasData(plantVarietySeed);
+            modelBuilder.Entity<Crop>().HasData(cropSeed);
+            modelBuilder.Entity<CropPlantVariety>().HasData(cropPlantVarietySeed);
+
         }
     }
 }

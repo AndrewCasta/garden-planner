@@ -6,6 +6,7 @@ namespace garden_planner.Data
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public ICollection<CropPlantVariety> CropPlantVarieties { get; set; }
     }
 
     public class CropData
