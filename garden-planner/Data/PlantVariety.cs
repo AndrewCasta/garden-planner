@@ -1,18 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace garden_planner.Data
 {
-
+    enum Lifecycle
+    {
+        Annual, Perennial
+    }
+    enum Sun
+    {
+        Full, Partial, Shade
+    }
+    enum Water
+    {
+        High, Moderate, Low
+    }
     internal sealed class PlantVariety
     {
 
         public int ID { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public string Lifecycle { get; set; } = string.Empty;
-        public string Sun { get; set; } = string.Empty;
-        public string Water { get; set; } = string.Empty;
+        public Lifecycle Lifecycle { get; set; }
+        public Sun Sun { get; set; }
+        public Water Water { get; set; }
         public bool Spring { get; set; }
         public bool Summer { get; set; }
         public bool Autum { get; set; }
