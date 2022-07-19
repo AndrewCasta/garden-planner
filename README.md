@@ -1,6 +1,6 @@
 # Garden app
 
-This app is currently being built. See design details details.
+This app is currently being built. See design details below.
 
 
 ## Purpose
