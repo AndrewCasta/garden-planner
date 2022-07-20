@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import PlantCard from '../components/PlantCard';
+import PlantCard from './PlantCard';
+import PlantVarietyCard from './PlantVarietyCard';
 
-const url = 'https://localhost:7104/plant-varieties';
+const apiUrl = 'https://localhost:7104';
 
 export default function CropPlants() {
   const [plantVarieties, setPlantVarieties] = useState<any[]>([]);
 
   const fetchPlants = async () => {
-    const response = await fetch(url);
+    const response = await fetch(`${apiUrl}/plant-varieties`);
     const data = await response.json();
     setPlantVarieties(data);
   };
@@ -19,7 +20,7 @@ export default function CropPlants() {
   return (
     <div>
       {plantVarieties.map(plant => (
-        <PlantCard key={plant.id} {...plant} />
+        <PlantVarietyCard key={plant.id} {...plant} />
       ))}
     </div>
   );

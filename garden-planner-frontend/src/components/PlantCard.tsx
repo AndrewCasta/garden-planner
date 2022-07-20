@@ -15,7 +15,7 @@ export default function PlantCard(props: any) {
         component='img'
         height='140'
         src={`/images/plant-icons/${image}`}
-        alt='props.name'
+        alt={'props.name'}
       />
       <CardContent>
         <Typography gutterBottom variant='h5' component='div'>
