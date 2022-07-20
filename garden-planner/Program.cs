@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 using garden_planner.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,11 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader()
         .WithOrigins("http://localhost:3000");
     });
+});
+
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(opt =>
+{
+    opt.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
 // Add services to the container.
