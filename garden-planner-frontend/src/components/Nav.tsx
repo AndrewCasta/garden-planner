@@ -58,6 +58,12 @@ export default function Nav(props: any) {
         }}>
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
+          <Typography
+            sx={{ padding: 1, paddingTop: 4 }}
+            variant='h5'
+            component='div'>
+            Select crop:
+          </Typography>
           <List>
             {crops.map((crop, index) => (
               <ListItem key={crop.id} disablePadding>

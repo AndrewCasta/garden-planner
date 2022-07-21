@@ -1,19 +1,16 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import OpacityIcon from '@mui/icons-material/Opacity';
+import Icon from '@mui/material/Icon';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -31,26 +28,23 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export default function PlantVarietyCard(props: any) {
-  const {
-    name,
-    image,
-    description,
-    sun,
-    water,
-    lifecycle,
-    spring,
-    summer,
-    autum,
-    winter,
-  } = props;
-  const [expanded, setExpanded] = React.useState(false);
+  const { name, image, description, sun, water, lifecycle } = props;
+  const seasons = [];
+  for (const prop in props) {
+    if (prop === 'spring' && props[prop]) seasons.push(prop);
+    if (prop === 'summer' && props[prop]) seasons.push(prop);
+    if (prop === 'autum' && props[prop]) seasons.push(prop);
+    if (prop === 'winter' && props[prop]) seasons.push(prop);
+  }
+
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card sx={{ maxWidth: 280 }}>
+    <Card sx={{ width: 230, height: '100%' }}>
       <CardMedia
         component='img'
         height='194'
@@ -58,19 +52,19 @@ export default function PlantVarietyCard(props: any) {
         alt='{name}'
       />
       <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
+        <Typography variant='h5' component='div'>
           {name}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label='add to favorites'>
-          <FavoriteIcon />
-        </IconButton>
-        {expanded && <span>{sun}</span>}
-        <IconButton aria-label='share'>
-          <ShareIcon />
-        </IconButton>
-        {expanded && <span>{water}</span>}
+      <CardActions>
+        <Icon>
+          <WbSunnyIcon />
+        </Icon>
+        {sun}
+        <Icon>
+          <OpacityIcon />
+        </Icon>
+        {water}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -85,6 +79,14 @@ export default function PlantVarietyCard(props: any) {
             Description
           </Typography>
           <Typography paragraph>{description}</Typography>
+          <Typography variant='body2' gutterBottom>
+            <strong>Lifecycle: </strong>
+            {lifecycle}
+          </Typography>
+          <Typography variant='body2' gutterBottom>
+            <strong>Planting: </strong>
+            {`${seasons.join(', ')}`}
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>
