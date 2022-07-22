@@ -11,6 +11,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import OpacityIcon from '@mui/icons-material/Opacity';
 import Icon from '@mui/material/Icon';
+import Stack from '@mui/material/Stack';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -52,19 +56,24 @@ export default function PlantVarietyCard(props: any) {
         alt='{name}'
       />
       <CardContent>
-        <Typography variant='h5' component='div'>
+        <Typography gutterBottom variant='h5' component='div'>
           {name}
         </Typography>
+        <Stack direction='row' spacing={1} alignItems='center'>
+          <Icon>
+            <WbSunnyIcon />
+          </Icon>
+          <Typography variant='body1'>{sun}</Typography>
+          <Icon>
+            <OpacityIcon />
+          </Icon>
+          <Typography variant='body1'>{water}</Typography>
+        </Stack>
       </CardContent>
       <CardActions>
-        <Icon>
-          <WbSunnyIcon />
-        </Icon>
-        {sun}
-        <Icon>
-          <OpacityIcon />
-        </Icon>
-        {water}
+        <FormGroup>
+          <FormControlLabel control={<Checkbox />} label='Plant' />
+        </FormGroup>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
