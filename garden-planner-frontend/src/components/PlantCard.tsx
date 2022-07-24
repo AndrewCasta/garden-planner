@@ -10,26 +10,13 @@ export default function PlantCard(props: any) {
   const { name, description, image } = props;
 
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card sx={{ maxWidth: 150 }}>
       <CardMedia
         component='img'
         height='140'
         src={`/images/plant-icons/${image}`}
-        alt='props.name'
+        alt={'props.name'}
       />
-      <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
-          {name}
-        </Typography>
-        <Typography variant='body2' color='text.secondary'>
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size='small'>Share</Button>
-        <Button size='small'>Learn More</Button>
-      </CardActions>
     </Card>
   );
 }
-// src\assets\plant-icons\basil.svg
