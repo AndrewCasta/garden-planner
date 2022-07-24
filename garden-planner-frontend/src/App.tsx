@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import CropPlants from './pages/CropPlants';
+import Nav from './components/Nav';
+import PlanningArea from './components/PlanningArea';
 
 function App() {
-  return <CropPlants />;
+  return (
+    <Nav>
+      <PlanningArea />
+    </Nav>
+  );
 }
 
 export default App;
