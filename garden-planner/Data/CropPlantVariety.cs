@@ -28,5 +28,46 @@ namespace garden_planner.Data
                 return await db.CropPlantsVarieties.Where(c => c.CropID == cropID).Select(p => p.PlantVariety.ID).ToListAsync();
             }
         }
+
+        internal async static Task<bool> CreateCropVarietySelectionAsync(CropPlantVariety cropPlantVariety)
+        {
+            using (var db = new AppDBContext())
+            {
+                try
+                {
+                    await db.CropPlantsVarieties.AddAsync(cropPlantVariety);
+                    return await db.SaveChangesAsync() >= 1;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+
+            }
+        }
+
+        internal async static Task<bool> DeleteCropVarietySelectionAsync(int varietyID, int cropID)
+        {
+            using (var db = new AppDBContext())
+            {
+                try
+                {
+                    List<CropPlantVariety> deletes = await db.CropPlantsVarieties.Where(c => c.CropID == cropID).Where(p => p.PlantVariety.ID == varietyID).ToListAsync();
+                    foreach (CropPlantVariety plant in deletes)
+                    {
+                        db.CropPlantsVarieties.Remove(plant);
+                    }
+                    bool save = await db.SaveChangesAsync() >= 1;
+                    System.Diagnostics.Debug.WriteLine($"Save: {save}");
+                    return save;
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e);
+                    return false;
+                }
+
+            }
+        }
     }
 }
