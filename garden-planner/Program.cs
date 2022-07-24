@@ -79,7 +79,7 @@ app.MapPost("/plant-varieties/crop/", async (CropPlantVariety cropPlantVariety) 
     }
 });
 
-app.MapDelete("/plant-varieties/{variety-id}/crop/{crop-id}", async (int varietyID, int cropID) =>
+app.MapDelete("/plant-varieties/{varietyID}/crop/{cropID}", async (int varietyID, int cropID) =>
 {
     bool deleteSuccessful = await CropPlantVarietyData.DeleteCropVarietySelectionAsync(varietyID, cropID);
     System.Diagnostics.Debug.WriteLine($"Delete: {deleteSuccessful}");
