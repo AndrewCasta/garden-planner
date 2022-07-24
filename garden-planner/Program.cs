@@ -66,4 +66,31 @@ app.MapGet("/plant-varieties/crop/{id}", async (int id) =>
     return Results.Ok(data);
 });
 
+app.MapPost("/plant-varieties/crop/", async (CropPlantVariety cropPlantVariety) =>
+{
+    bool createSuccessful = await CropPlantVarietyData.CreateCropVarietySelectionAsync(cropPlantVariety);
+    if (createSuccessful)
+    {
+        return Results.Ok("Success");
+    }
+    else
+    {
+        return Results.BadRequest();
+    }
+});
+
+app.MapDelete("/plant-varieties/{variety-id}/crop/{crop-id}", async (int varietyID, int cropID) =>
+{
+    bool deleteSuccessful = await CropPlantVarietyData.DeleteCropVarietySelectionAsync(varietyID, cropID);
+    System.Diagnostics.Debug.WriteLine($"Delete: {deleteSuccessful}");
+    if (deleteSuccessful)
+    {
+        return Results.Ok("Success");
+    }
+    else
+    {
+        return Results.BadRequest();
+    }
+});
+
 app.Run();
