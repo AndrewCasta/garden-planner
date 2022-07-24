@@ -33,6 +33,7 @@ export default function CropPlants() {
   }, []);
 
   const handleExpandClick = () => {
+    fetchCropVarieties();
     setExpanded(!expanded);
   };
 
@@ -60,9 +61,12 @@ export default function CropPlants() {
             flexWrap: 'wrap',
             gap: '20px',
           }}>
-          {plantVarieties.map(plant => (
-            <PlantVarietyCard key={plant.id} {...plant} />
-          ))}
+          {plantVarieties.map(plant => {
+            const selected = cropVarieties.includes(plant.id);
+            return (
+              <PlantVarietyCard key={plant.id} selected={selected} {...plant} />
+            );
+          })}
         </Box>
       )}
       {!expanded && (

@@ -16,6 +16,9 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
+const apiUrl = 'https://localhost:7104';
+const cropId = 1;
+
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -32,7 +35,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 export default function PlantVarietyCard(props: any) {
-  const { name, image, description, sun, water, lifecycle } = props;
+  const { id, name, image, description, sun, water, lifecycle } = props;
   const seasons = [];
   for (const prop in props) {
     if (prop === 'spring' && props[prop]) seasons.push(prop);
@@ -40,8 +43,36 @@ export default function PlantVarietyCard(props: any) {
     if (prop === 'autum' && props[prop]) seasons.push(prop);
     if (prop === 'winter' && props[prop]) seasons.push(prop);
   }
-
+  const [selected, setSelected] = useState<boolean>(props.selected);
   const [expanded, setExpanded] = useState(false);
+
+  const postCropVariety = async () => {
+    const data = { plantVarietyID: id, cropID: cropId };
+    const response = await fetch(`${apiUrl}/plant-varieties/crop`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(response);
+  };
+
+  const deleteCropVariety = async () => {
+    const response = await fetch(
+      `${apiUrl}/plant-varieties/${id}/crop/${cropId}`,
+      {
+        method: 'DELETE',
+      }
+    );
+    console.log(response);
+  };
+
+  const handleSelectClick = () => {
+    if (!selected) postCropVariety();
+    if (selected) deleteCropVariety();
+    setSelected(!selected);
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -72,7 +103,12 @@ export default function PlantVarietyCard(props: any) {
       </CardContent>
       <CardActions>
         <FormGroup>
-          <FormControlLabel control={<Checkbox />} label='Plant' />
+          <FormControlLabel
+            control={
+              <Checkbox checked={selected} onClick={handleSelectClick} />
+            }
+            label='Plant'
+          />
         </FormGroup>
         <ExpandMore
           expand={expanded}
