@@ -6,8 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useStore } from '../store';
-
-const apiUrl = 'https://localhost:7104';
+import ApiURL from '../utils/ApiURL';
 
 export default function CropPlants() {
   const [plantVarieties, setPlantVarieties] = useState<any[]>([]);
@@ -16,12 +15,12 @@ export default function CropPlants() {
   const cropId = useStore(state => state.crop.id);
 
   const fetchPlants = async () => {
-    const response = await fetch(`${apiUrl}/plant-varieties`);
+    const response = await fetch(`${ApiURL}/plant-varieties`);
     const data = await response.json();
     setPlantVarieties(data);
   };
   const fetchCropVarieties = async () => {
-    const response = await fetch(`${apiUrl}/plant-varieties/crop/${cropId}`);
+    const response = await fetch(`${ApiURL}/plant-varieties/crop/${cropId}`);
     const data = await response.json();
     setCropVarieties(data);
   };

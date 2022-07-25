@@ -16,8 +16,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useStore } from '../store';
-
-const apiUrl = 'https://localhost:7104';
+import ApiURL from '../utils/ApiURL';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -49,7 +48,7 @@ export default function PlantVarietyCard(props: any) {
 
   const postCropVariety = async () => {
     const data = { plantVarietyID: id, cropID: cropId };
-    const response = await fetch(`${apiUrl}/plant-varieties/crop`, {
+    const response = await fetch(`${ApiURL}/plant-varieties/crop`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +60,7 @@ export default function PlantVarietyCard(props: any) {
 
   const deleteCropVariety = async () => {
     const response = await fetch(
-      `${apiUrl}/plant-varieties/${id}/crop/${cropId}`,
+      `${ApiURL}/plant-varieties/${id}/crop/${cropId}`,
       {
         method: 'DELETE',
       }

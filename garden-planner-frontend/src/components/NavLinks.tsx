@@ -10,14 +10,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useStore } from '../store';
-import Modal from '@mui/material/Modal';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
-
-const apiUrl = 'https://localhost:7104';
+import ApiURL from '../utils/ApiURL';
 
 export default function NavLinks() {
   const [crops, setCrops] = useState<any[]>([]);
@@ -28,14 +26,14 @@ export default function NavLinks() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchCrops = async () => {
-    const response = await fetch(`${apiUrl}/crops`);
+    const response = await fetch(`${ApiURL}/crops`);
     const data = await response.json();
     setCrops(data);
   };
 
   const postCrop = async (cropName: string) => {
     const data = { name: cropName };
-    const response = await fetch(`${apiUrl}/crop`, {
+    const response = await fetch(`${ApiURL}/crop`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +45,7 @@ export default function NavLinks() {
   };
 
   const deleteCrop = async (id: number) => {
-    const response = await fetch(`${apiUrl}/crop/${id}`, {
+    const response = await fetch(`${ApiURL}/crop/${id}`, {
       method: 'DELETE',
     });
     return response;
