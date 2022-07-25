@@ -71,6 +71,7 @@ export default function NavLinks() {
     const cropIndex = crops.findIndex(crop => crop.id === id);
     crops.splice(cropIndex, 1);
     setCrops(crops);
+    setSelectedCrop({ id: 0, name: 'No crop selected' });
     setIsDeleting(false);
   };
 
