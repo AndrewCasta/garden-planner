@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
+import { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import PlantCard from './PlantCard';
 import PlantVarietyCard from './PlantVarietyCard';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import { useStore } from '../store';
 
 const apiUrl = 'https://localhost:7104';
 
@@ -15,6 +13,7 @@ export default function CropPlants() {
   const [plantVarieties, setPlantVarieties] = useState<any[]>([]);
   const [cropVarieties, setCropVarieties] = useState<any[]>([]);
   const [expanded, setExpanded] = useState(false);
+  const cropId = useStore(state => state.crop.id);
 
   const fetchPlants = async () => {
     const response = await fetch(`${apiUrl}/plant-varieties`);
@@ -22,7 +21,7 @@ export default function CropPlants() {
     setPlantVarieties(data);
   };
   const fetchCropVarieties = async () => {
-    const response = await fetch(`${apiUrl}/plant-varieties/crop/1`);
+    const response = await fetch(`${apiUrl}/plant-varieties/crop/${cropId}`);
     const data = await response.json();
     setCropVarieties(data);
   };
@@ -30,7 +29,7 @@ export default function CropPlants() {
   useEffect(() => {
     fetchPlants();
     fetchCropVarieties();
-  }, []);
+  }, [cropId]);
 
   const handleExpandClick = () => {
     fetchCropVarieties();
@@ -43,8 +42,8 @@ export default function CropPlants() {
         backgroundColor: '#f5f5f5',
         padding: '1rem 2rem',
       }}>
-      <Stack direction='row' justifyContent='space-between'>
-        <Typography gutterBottom variant='h5' component='div'>
+      <Stack paddingBottom={2} direction='row' justifyContent='space-between'>
+        <Typography variant='h5' component='div'>
           Plant Varieties:
         </Typography>
         <Button
@@ -76,11 +75,14 @@ export default function CropPlants() {
             flexDirection: 'row',
             flexWrap: 'wrap',
             gap: '20px',
+            maxHeight: '150px',
+            overflowY: 'scroll',
           }}>
           {plantVarieties.map(plant => {
             if (cropVarieties.includes(plant.id)) {
               return <PlantCard key={plant.id} {...plant} />;
             }
+            return null;
           })}
         </Box>
       )}
