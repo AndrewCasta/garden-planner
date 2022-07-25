@@ -9,7 +9,8 @@ Simple app to browse plants and create garden bed layouts.
 ### Demo
 
 [See the current demo here](https://victorious-glacier-022c04b00.1.azurestaticapps.net)
-[Browse the API here.](https://gardenplannerbackend.azurewebsites.net/swagger/index.html)
+
+[Browse the API here](https://gardenplannerbackend.azurewebsites.net/swagger/index.html)
 
 ## Solution design
 
