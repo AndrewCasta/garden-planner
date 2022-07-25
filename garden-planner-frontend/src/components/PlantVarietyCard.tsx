@@ -15,9 +15,9 @@ import Stack from '@mui/material/Stack';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useStore } from '../store';
 
 const apiUrl = 'https://localhost:7104';
-const cropId = 1;
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -45,6 +45,7 @@ export default function PlantVarietyCard(props: any) {
   }
   const [selected, setSelected] = useState<boolean>(props.selected);
   const [expanded, setExpanded] = useState(false);
+  const cropId = useStore(state => state.crop.id);
 
   const postCropVariety = async () => {
     const data = { plantVarietyID: id, cropID: cropId };
