@@ -57,9 +57,7 @@ namespace garden_planner.Data
                     {
                         db.CropPlantsVarieties.Remove(plant);
                     }
-                    bool save = await db.SaveChangesAsync() >= 1;
-                    System.Diagnostics.Debug.WriteLine($"Save: {save}");
-                    return save;
+                    return await db.SaveChangesAsync() >= 1;
                 }
                 catch (Exception e)
                 {
