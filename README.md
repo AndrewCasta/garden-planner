@@ -12,18 +12,24 @@ Simple app to browse plants and create garden bed layouts.
 
 [Browse the API here](https://gardenplannerbackend.azurewebsites.net/swagger/index.html)
 
+#### Progress
+The current demo implements the 'Create crop & pick plants' feature as a simple prototype.
+
+Next up is to clean up the current feature's code & add some improvements to use UI (loading states etc). Then move onto the 'Create plant layout' feature.
+
+
 ## Solution design
 
 ### MVP Interaction & design
 
 [Wireframe](https://www.figma.com/file/tDk4BRcOShfWNHwuEjyes3/Garden-Planner?node-id=520369%3A448)
 
-Create crop & pick plants
+**Create crop & pick plants**
 
 - Create a crop with a name
 - Browse plant varieties & add to your crop
 
-Create plant layout
+**Create plant layout**
 
 - Select crop & add a planter
 - Configure the planter width, length & spacing
@@ -31,7 +37,7 @@ Create plant layout
 - Drag plant varieties into planters to create new plant of that variety
 - Plants can be moved around planter or to a different planter
 
-Plant card
+**Plant card**
 
 - Name, plant icon, key detail icons (sun, water)
 - Click/hover to view details
